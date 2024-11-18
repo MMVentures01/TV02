@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to Naver</title>
+</head>
+<body>
+    <script>
+        // 尝试打开 Naver App，并在其中加载指定的页面
+        window.location.href = "naversearchapp://default?url=https://vip.zkiee2.com/rk/room1";
+
+        // 如果没有安装 Naver 应用，几秒后跳转到浏览器上的网页
+        setTimeout(function() {
+            window.location.href = "https://vip.zkiee2.com/rk/room1";
+        }, 2000);
+    </script>
+    <p>잠시만 기다려 주십시오...</p>
+</body>
+</html>
