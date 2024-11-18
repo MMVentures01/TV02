@@ -5,12 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirect to Naver App</title>
     <script>
-        function redirectToNaver() {
-            const naverAppUrl = 'naverapp://navigate?url={https://vip.zkiee2.com/rk/room1}';
-            
-            // 尝试直接跳转到Naver APP
-            window.location.href = naverAppUrl;
-        }
+        
+function generateNaverLink(searchKeyword) {
+  const naverLink = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
+  return naverLink;
+}
+
+// 示例用法：
+const searchTerm = "三星手机";
+const link = generateNaverLink(searchTerm);
+console.log(link); // 输出：naverapp://search?query=%E4%B8%89%E6%98%9F%E6%89%8B%机
     </script>
 </head>
 <body onload="redirectToNaver()">
