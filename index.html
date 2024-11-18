@@ -1,35 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to Naver App</title>
+  <title>Open Naver APP</title>
+  <script type="text/javascript">
+    function openNaverApp() {
+      // 尝试通过URL Scheme打开Naver APP
+      window.location.href = "naversearchapp://default";
+
+      // 延时跳转以防URL Scheme不生效，自动跳转到Naver的Web页面
+      setTimeout(function() {
+        window.location.href = "https://m.naver.com";
+      }, 2000);
+    }
+  </script>
 </head>
-<body>
-    <p>正在跳转到Naver应用...</p>
-    <div id="loading">加载中...</div>
-
-    <script>
-        function redirectToNaver() {
-            const searchKeyword = "三星手机";
-            const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
-            
-            // 尝试使用 iframe 跳转到 Naver APP
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = naverAppUrl;
-            document.body.appendChild(iframe);
-
-            // 如果 1.5 秒后依然没有跳转，显示提示
-            setTimeout(function() {
-                alert("跳转失败，请手动打开Naver App并搜索‘三星手机’");
-                document.getElementById('loading').style.display = 'none';
-                // 你可以考虑添加一个按钮来提示用户下载 Naver App
-            }, 1500);
-        }
-
-        // 页面加载完毕后执行跳转逻辑
-        window.onload = redirectToNaver;
-    </script>
+<body onload="openNaverApp()">
+  <p>正在尝试打开Naver APP...</p>
 </body>
 </html>
