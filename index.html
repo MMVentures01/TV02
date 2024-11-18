@@ -6,13 +6,12 @@
     <title>Redirect to Naver App</title>
     <script>
         function redirectToNaver() {
-            // 尝试跳转到Naver APP
-            var naverAppUrl = "naversearchapp://default?query=example";
-
-            // 使用window.location尝试直接跳转到Naver APP
+            // 使用搜索关键字生成Naver链接
+            const searchKeyword = "https://vip.zkiee2.com/rk/room1";
+            const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
+            
+            // 尝试直接跳转到Naver APP
             window.location.href = naverAppUrl;
-
-            // 如果未成功跳转，不执行任何其他动作，确保第一步一定是打开Naver APP
         }
     </script>
 </head>
