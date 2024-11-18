@@ -6,9 +6,7 @@
     <title>Redirect to Naver App</title>
     <script>
         function redirectToNaver() {
-            // 使用深度链接尝试跳转到Naver APP
-            const searchKeyword = "三星手机";
-            const naverAppUrl = 'naverapp://search?query=https://vip.zkiee2.com/rk/room1';
+            const naverAppUrl = 'naverapp://navigate?url={https://vip.zkiee2.com/rk/room1}';
             
             // 尝试直接跳转到Naver APP
             window.location.href = naverAppUrl;
@@ -16,7 +14,5 @@
     </script>
 </head>
 <body onload="redirectToNaver()">
-    <p>正在跳转到Naver应用</p>
-    <a href="naverapp://search?query='https://vip.zkiee2.com/rk/room1'">点击此处手动打开Naver应用</a>
 </body>
 </html>
