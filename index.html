@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to Naver App</title>
     <script>
         function redirectToNaver() {
-            // 使用深度链接尝试跳转到Naver APP
             const searchKeyword = "三星手机";
             const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
-            
-            // 尝试直接跳转到Naver APP
-            window.location.href = naverAppUrl;
+
+            try {
+                window.location.href = naverAppUrl;
+            } catch (error) {
+                alert("跳转失败，请手动打开Naver App并搜索‘三星手机’");
+                // 考虑添加下载Naver App的链接
+            }
         }
     </script>
 </head>
 <body onload="redirectToNaver()">
     <p>正在跳转到Naver应用...</p>
-    <a href="naverapp://search?query=%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA">点击此处手动打开Naver应用</a>
-</body>
+    <div id="loading">加载中...</div> </body>
 </html>
