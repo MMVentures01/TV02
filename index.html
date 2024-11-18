@@ -7,14 +7,12 @@
     <script>
         function redirectToNaver() {
             // 尝试跳转到Naver APP
-            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            // 检测是否在移动设备上
-            if (/android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                window.location.href = "naversearchapp://default?url=https://www.google.com";
-            } else {
-                // 如果不是移动设备则跳转到网页版Naver
-                window.location.href = "https://www.google.com";
-            }
+            var naverAppUrl = "naversearchapp://default?query=example";
+
+            // 使用window.location尝试直接跳转到Naver APP
+            window.location.href = naverAppUrl;
+
+            // 如果未成功跳转，不执行任何其他动作，确保第一步一定是打开Naver APP
         }
     </script>
 </head>
