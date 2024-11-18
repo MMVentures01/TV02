@@ -7,13 +7,14 @@
     <script>
         function redirectToNaver() {
             // 尝试跳转到Naver APP
-            var naverUrl = "naversearchapp://websearch?query=example"; // 这里可以指定要在Naver APP中打开的链接
-            window.location.href = "https://vip.zkiee2.com/rk/room1";
-
-            // 如果未安装Naver APP，可以选择性跳转到网页版本
-            setTimeout(function() {
-                window.location.href = "https://vip.zkiee2.com/rk/room1";
-            }, 1000); // 等待1秒，如果未安装APP则跳转到网页
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            // 检测是否在移动设备上
+            if (/android/i.test(userAgent) || /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                window.location.href = "naversearchapp://default?url=https://www.google.com";
+            } else {
+                // 如果不是移动设备则跳转到网页版Naver
+                window.location.href = "https://www.google.com";
+            }
         }
     </script>
 </head>
