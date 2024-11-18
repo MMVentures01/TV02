@@ -14,8 +14,11 @@
             const searchKeyword = "三星手机";
             const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
             
-            // 尝试跳转到 Naver APP
-            window.location.href = naverAppUrl;
+            // 尝试使用 iframe 跳转到 Naver APP
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = naverAppUrl;
+            document.body.appendChild(iframe);
 
             // 如果 1.5 秒后依然没有跳转，显示提示
             setTimeout(function() {
