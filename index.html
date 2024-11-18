@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirect to Naver App</title>
     <script>
-        
-function generateNaverLink(searchKeyword) {
-  const naverLink = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
-  return naverLink;
-}
-
-// 示例用法：
-const searchTerm = "三星手机";
-const link = generateNaverLink(searchTerm);
-console.log(link); // 输出：naverapp://search?query=%E4%B8%89%E6%98%9F%E6%89%8B%机
+        function redirectToNaver() {
+            // 使用深度链接尝试跳转到Naver APP
+            const searchKeyword = "三星手机";
+            const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
+            
+            // 尝试直接跳转到Naver APP
+            window.location.href = naverAppUrl;
+        }
     </script>
 </head>
 <body onload="redirectToNaver()">
+    <p>正在跳转到Naver应用...</p>
+    <a href="naverapp://search?query=%E8%8B%B9%E6%9E%9C%E6%89%8B%E6%9C%BA">点击此处手动打开Naver应用</a>
 </body>
 </html>
