@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to Naver App</title>
+</head>
+<body>
+    <p>正在跳转到Naver应用...</p>
+    <div id="loading">加载中...</div>
+
     <script>
         function redirectToNaver() {
             const searchKeyword = "三星手机";
             const naverAppUrl = `naverapp://search?query=${encodeURIComponent(searchKeyword)}`;
+            
+            // 尝试跳转到 Naver APP
+            window.location.href = naverAppUrl;
 
-            try {
-                window.location.href = naverAppUrl;
-            } catch (error) {
+            // 如果 1.5 秒后依然没有跳转，显示提示
+            setTimeout(function() {
                 alert("跳转失败，请手动打开Naver App并搜索‘三星手机’");
-                // 考虑添加下载Naver App的链接
-            }
+                document.getElementById('loading').style.display = 'none';
+                // 你可以考虑添加一个按钮来提示用户下载 Naver App
+            }, 1500);
         }
+
+        // 页面加载完毕后执行跳转逻辑
+        window.onload = redirectToNaver;
     </script>
-</head>
-<body onload="redirectToNaver()">
-    <p>正在跳转到Naver应用...</p>
-    <div id="loading">加载中...</div> </body>
+</body>
 </html>
