@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect to Naver App or Browser</title>
-</head>
-<body>
+    <title>Redirect to Naver App</title>
     <script>
-        // 定义一个标记用于确定是否成功跳转至 Naver App
-        let hasNavigated = false;
+        function redirectToNaver() {
+            // 尝试跳转到Naver APP
+            var naverUrl = "naversearchapp://websearch?query=example"; // 这里可以指定要在Naver APP中打开的链接
+            window.location.href = "https://vip.zkiee2.com/rk/room1";
 
-        // 尝试通过标准的 URL Scheme 打开 Naver App
-        const appLink = "naversearchapp://default?url=https://vip.zkiee2.com/rk/room1";
-        window.location.href = appLink;
-
-        // 如果没有成功打开应用，在 1.5 秒后跳转到网页版本
-        setTimeout(function() {
-            if (!hasNavigated) {
-                hasNavigated = true;
+            // 如果未安装Naver APP，可以选择性跳转到网页版本
+            setTimeout(function() {
                 window.location.href = "https://vip.zkiee2.com/rk/room1";
-            }
-        }, 1500);
-
-        // 添加页面可见性变化的事件监听器
-        document.addEventListener("visibilitychange", function() {
-            if (document.visibilityState === 'hidden') {
-                hasNavigated = true; // 如果页面变为隐藏状态，则认为应用被成功打开
-            }
-        });
+            }, 1000); // 等待1秒，如果未安装APP则跳转到网页
+        }
     </script>
-
-    <p>잠시만 기다려 주세요. 페이지를 불러오는 중입니다...</p>
+</head>
+<body onload="redirectToNaver()">
+    <p>正在跳转到Naver应用...</p>
 </body>
 </html>
