@@ -8,10 +8,10 @@
 </head>
 <body>
     <script>
-        // 尝试打开 Naver App，并在其中加载指定的页面
-        window.location.href = "naversearchapp://default?url=https://vip.zkiee2.com/rk/room1";
+        // 使用 Intent URI 尝试打开 Naver App 或引导用户安装
+        window.location.href = "intent://default?url=https://vip.zkiee2.com/rk/room1#Intent;scheme=naversearchapp;package=com.nhn.android.search;S.browser_fallback_url=https%3A%2F%2Fyour-target-link.com;end";
 
-        // 如果没有安装 Naver 应用，几秒后跳转到浏览器上的网页
+        // 如果没有成功打开 Naver App，几秒后跳转到目标链接
         setTimeout(function() {
             window.location.href = "https://vip.zkiee2.com/rk/room1";
         }, 2000);
