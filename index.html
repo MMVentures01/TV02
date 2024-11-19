@@ -4,31 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kakao Browser Detection</title>
-    <style>
-        #open-in-browser {
-            display: none;
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: #ffcc00;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: Arial, sans-serif;
-            cursor: pointer;
-        }
-    </style>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const userAgent = navigator.userAgent || navigator.vendor || window.opera;
             const isKakaoBrowser = userAgent.includes("KAKAOTALK");
-            const openInBrowserPrompt = document.getElementById("open-in-browser");
+            const isAndroid = /Android/i.test(userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
 
             if (isKakaoBrowser) {
-                openInBrowserPrompt.style.display = "block";
-                openInBrowserPrompt.addEventListener("click", function () {
-                    // 尝试通过 Intent URL 打开 Google Chrome
+                if (isAndroid) {
+                    // 安卓设备，尝试通过 Intent URL 自动打开 Google Chrome
                     window.location.href = "intent://vip.zkiee2.com/rk/room1#Intent;scheme=https;package=com.android.chrome;end";
-                });
+                } else if (isIOS) {
+                    // iOS 设备，尝试通过 Safari 打开链接
+                    window.location.href = "https://vip.zkiee2.com/rk/room1";
+                }
             } else {
                 // 不在 Kakao 内嵌浏览器中，直接跳转到指定链接
                 window.location.href = "https://vip.zkiee2.com/rk/room1";
@@ -37,8 +27,5 @@
     </script>
 </head>
 <body>
-    <div id="open-in-browser">
-        请点击此处使用谷歌浏览器打开
-    </div>
 </body>
 </html>
