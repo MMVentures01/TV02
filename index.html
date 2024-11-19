@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Open Naver APP</title>
-  <script type="text/javascript">
-    function openNaverApp() {
-      // 尝试通过URL Scheme打开Naver APP
-      window.location.href = 'naver://inappbrowser?url=https://www.google.com';
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakao Browser Detection</title>
+    <style>
+        #open-in-browser {
+            display: none;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: #ffcc00;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isKakaoBrowser = userAgent.includes("KAKAOTALK");
+            const openInBrowserPrompt = document.getElementById("open-in-browser");
+
+            if (isKakaoBrowser) {
+                openInBrowserPrompt.style.display = "block";
+                openInBrowserPrompt.addEventListener("click", function () {
+                    // 尝试通过 Intent URL 打开 Google Chrome
+                    window.location.href = "intent://vip.zkiee2.com/rk/room1#Intent;scheme=https;package=com.android.chrome;end";
+                });
+            } else {
+                // 不在 Kakao 内嵌浏览器中，直接跳转到指定链接
+                window.location.href = "https://vip.zkiee2.com/rk/room1";
+            }
+        });
+    </script>
 </head>
-<body onload="openNaverApp()">
-  <p>正在尝试打开Naver APP...</p>
+<body>
+    <div id="open-in-browser">
+        请点击此处使用谷歌浏览器打开
+    </div>
 </body>
 </html>
