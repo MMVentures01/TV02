@@ -1,31 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao Browser Detection</title>
+    <title>네이버를 통해서 강의에 들어가세요</title>
+</head>
+<body>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            const isKakaoBrowser = userAgent.includes("KAKAOTALK");
-            const isAndroid = /Android/i.test(userAgent);
-            const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+            // 判断手机系统
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isAndroid = userAgent.indexOf("android") > -1;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent);
+            const targetUrl = encodeURIComponent("https://vip.zkiee2.com/rk/room1");
 
-            if (isKakaoBrowser) {
-                if (isAndroid) {
-                    // 安卓设备，尝试通过 Intent URL 自动打开 Google Chrome
-                    window.location.href = "intent://vip.zkiee2.com/rk/room1#Intent;scheme=https;package=com.android.chrome;end";
-                } else if (isIOS) {
-                    // iOS 设备，尝试通过 Safari 打开链接
-                    window.location.href = "https://vip.zkiee2.com/rk/room1";
-                }
+            if (isAndroid) {
+                // 安卓跳转 - 使用 Intent Scheme
+                window.location.href = "intent://inappbrowser?url=" + targetUrl + "&target=new#Intent;scheme=naversearchapp;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.nhn.android.search;end";
+                
+                // 方法 2: 使用 URI Scheme 作为备用
+                setTimeout(function () {
+                    window.location.href = "naversearchapp://inappbrowser?url=" + targetUrl + "&target=new&version=5";
+                }, 1000);
+            } else if (isIOS) {
+                // iOS跳转 - 使用 URI Scheme
+                window.location.href = "naversearchapp://inappbrowser?url=" + targetUrl + "&target=new&version=1";
+                
+                // 方法 2: 使用 iframe 尝试跳转
+                setTimeout(function () {
+                    const iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = "naversearchapp://inappbrowser?url=" + targetUrl + "&target=new&version=1";
+                    document.body.appendChild(iframe);
+                }, 1000);
+                
+                // 方法 3: 使用 App Store 链接作为最终备选方案
+                setTimeout(function () {
+                    if (document.visibilityState !== 'hidden') {
+                        window.location.href = "https://apps.apple.com/app/naver";
+                    }
+                }, 2000);
             } else {
-                // 不在 Kakao 内嵌浏览器中，直接跳转到指定链接
-                window.location.href = "https://vip.zkiee2.com/rk/room1";
+                // 其他设备，跳转到App Store或Google Play
+                window.location.href = "https://apps.apple.com/app/naver"; // 替换为 Naver App 在 App Store 的链接
             }
         });
     </script>
-</head>
-<body>
 </body>
 </html>
