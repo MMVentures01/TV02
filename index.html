@@ -5,12 +5,7 @@
   <script type="text/javascript">
     function openNaverApp() {
       // 尝试通过URL Scheme打开Naver APP
-      window.location.href = "naver://search?query=天气";
-
-      // 延时跳转以防URL Scheme不生效，自动跳转到Naver的Web页面
-      setTimeout(function() {
-        window.location.href = "https://m.naver.com";
-      }, 2000);
+      window.location.href = 'naver://inappbrowser?url=https://www.google.com';
     }
   </script>
 </head>
